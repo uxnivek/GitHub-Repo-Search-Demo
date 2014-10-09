@@ -1,0 +1,17 @@
+<div class="user-panel">
+	<div class="jumbotron">
+		<form name="searchUserForm" class="search-form" 
+			ng-submit="searchUserForm.$valid && UserCtrl.searchUser(UserCtrl.user)" novalidate>
+			<input ng-model="UserCtrl.user" type="username" class="form-control" data-hotkey="s" name="search-name" placeholder="@username" tabindex="1" autocapitalize="off" required />
+			<div class="scope-badge"><img src="images/github.ico" height="16"> <b>GitHub</b></div>
+			<button type="submit" class="btn btn-primary">Search</button>
+			<div class="message">{{UserCtrl.message}}</div>
+		</form>
+	</div>
+
+	<!-- User Details -->
+	<user-details ng-show="UserCtrl.details.login" user="UserCtrl.details"></user-details>
+	<!-- User Repos -->
+	<user-repos ng-show="UserCtrl.repos" repos="UserCtrl.repos"></user-repos>
+
+</div>

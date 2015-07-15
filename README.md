@@ -6,6 +6,7 @@ Install & Run:
 2. CD to your local copy of the git repo
 3. Open a Command Prompt in that folder 
 4. $ npm install
-5. $ bower install
-6. $ grunt serve
-7. http://localhost:8000/
+5. $ git config --global url."https://".insteadOf git:// (optional)
+6. $ bower install
+7. $ grunt serve
+8. http://localhost:8000/

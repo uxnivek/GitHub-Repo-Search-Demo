@@ -2,11 +2,11 @@
 	'use strict';
 
 	angular.module('app')
-		.directive('userPanel', userPanel);
+		.directive('userPanel', userPanelDirective);
 
-	userPanel.$inject = ['config'];
+	userPanelDirective.$inject = ['config'];
 
-	function userPanel (config) {
+	function userPanelDirective (config) {
 		return {
 			restrict: 'E',
 			replace: true,

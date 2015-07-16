@@ -205,16 +205,16 @@ module.exports = function(grunt) {
             dist: {}
         },
 
-        // imagemin: {
-        //     dist: {
-        //         files: [{
-        //             expand: true,
-        //             cwd: '<%= yeoman.app %>/images',
-        //             src: '{,*/}*.{png,jpg,jpeg,gif}',
-        //             dest: '<%= yeoman.dist %>/images'
-        //         }]
-        //     }
-        // },
+        imagemin: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= yeoman.app %>/images',
+                    src: '{,*/}*.{png,jpg,jpeg,gif}',
+                    dest: '<%= yeoman.dist %>/images'
+                }]
+            }
+        },
 
         // ng-annotate tries to make the code safe for minification automatically
         // by using the Angular long form for dependency injection.
@@ -241,7 +241,7 @@ module.exports = function(grunt) {
                         '*.{ico,png,txt}',
                         '.htaccess',
                         '*.html',
-                        'images/{,*/}*.{webp}',
+                        'images/*',
                         'fonts/*'
                     ]
                 }, {

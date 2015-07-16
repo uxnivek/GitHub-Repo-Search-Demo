@@ -205,16 +205,16 @@ module.exports = function(grunt) {
             dist: {}
         },
 
-        imagemin: {
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= yeoman.app %>/images',
-                    src: '{,*/}*.{png,jpg,jpeg,gif}',
-                    dest: '<%= yeoman.dist %>/images'
-                }]
-            }
-        },
+        // imagemin: {
+        //     dist: {
+        //         files: [{
+        //             expand: true,
+        //             cwd: '<%= yeoman.app %>/images',
+        //             src: '{,*/}*.{png,jpg,jpeg,gif}',
+        //             dest: '<%= yeoman.dist %>/images'
+        //         }]
+        //     }
+        // },
 
         // ng-annotate tries to make the code safe for minification automatically
         // by using the Angular long form for dependency injection.
@@ -287,21 +287,38 @@ module.exports = function(grunt) {
             }
         },
 
+        ngtemplates:  {
+            app: {
+                cwd: '<%= yeoman.app %>/scripts',
+                src: '{,*/}*.html',
+                dest: '.tmp/scripts/app.templates.js',
+                options: {
+                    module: 'app'
+                }
+            }
+        },
+
         browserify: {
             dist: {
                 files: {
-                    '.tmp/scripts/app.js': ['<%= yeoman.app %>/scripts/user.module.js'],
-                    '.tmp/scripts/vendor.js': [
-                            'bower_components/jquery/dist/jquery.js',
-                            'bower_components/angular/angular.js',
-                            'bower_components/angular-resource/angular-resource.js',
-                            'bower_components/angular-animate/angular-animate.js',
-                            'bower_components/angular-route/angular-route.js',
-                            'bower_components/d3/d3.js',
-                            'bower_components/nvd3/nv.d3.js',
-                            'bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js',
-                            'bower_components/lodash/dist/lodash.compat.js'
-                        ]
+                    // '.tmp/scripts/vendor.js': [
+                    '<%= yeoman.dist %>/scripts/vendor.js': [
+                        'bower_components/jquery/dist/jquery.js',
+                        'bower_components/angular/angular.js',
+                        'bower_components/angular-resource/angular-resource.js',
+                        'bower_components/angular-animate/angular-animate.js',
+                        'bower_components/angular-route/angular-route.js',
+                        'bower_components/d3/d3.js',
+                        'bower_components/nvd3/nv.d3.js',
+                        'bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js',
+                        'bower_components/lodash/dist/lodash.compat.js'
+                    ],
+                    
+                    // '.tmp/scripts/app.js': [
+                    '<%= yeoman.dist %>/scripts/app.js': [
+                        '<%= yeoman.app %>/app.js',
+                        '.tmp/scripts/app.templates.js'
+                    ]
                 },
                 options: {
                     // transform: ['coffeeify']
@@ -312,13 +329,13 @@ module.exports = function(grunt) {
         uglify: {
             dist: {
                 files: {
-                    '<%= yeoman.dist %>/scripts/app.js': [
-                        '.tmp/scripts/app.js'
-                    ],
-
                     '<%= yeoman.dist %>/scripts/vendor.js': [
                         '.tmp/scripts/vendor.js'
                     ],
+
+                    '<%= yeoman.dist %>/scripts/app.js': [
+                        '.tmp/scripts/app.js'
+                    ]
                 }
             }
         }
@@ -360,10 +377,11 @@ module.exports = function(grunt) {
         // 'autoprefixer',
         // 'concat',
         // 'ngAnnotate',
+        'ngtemplates',
         'browserify:dist',
         'copy:dist',
         // 'cssmin',
-        'uglify',
+        // 'uglify',
         // 'filerev',
     ]);
 

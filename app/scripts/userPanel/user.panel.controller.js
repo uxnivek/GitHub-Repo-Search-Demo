@@ -36,5 +36,5 @@
 					user.message = error.message;
 				});
 		};
-	});
+	};
 })();

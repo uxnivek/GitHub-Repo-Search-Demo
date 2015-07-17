@@ -2,12 +2,11 @@
 	'use strict';
 
 	angular.module('app')
-		
 		.controller('UserPanelController', UserPanelController);
 
-	UserPanelController.$inject = ['$http'];
+	UserPanelController.$inject = ['$http', 'config'];
 
-	function UserPanelController($http) {
+	function UserPanelController($http, config) {
 		var user = this;
 		user.details = {};
 		user.repos = [];

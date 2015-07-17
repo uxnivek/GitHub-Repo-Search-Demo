@@ -2,12 +2,11 @@
 	'use strict';
 
 	angular.module('app')
-		
 		.controller('UserRepositoryController', UserRepositoryController);
 
-	UserRepositoryController.$inject = ['$http', '$log'];
+	UserRepositoryController.$inject = ['$http', '$log', 'config'];
 
-	function UserRepositoryController($http, $log) {
+	function UserRepositoryController($http, $log, config) {
 		var currentRepo = this;
 		currentRepo.showId = '';
 		currentRepo.showChart = false;
@@ -17,7 +16,6 @@
 
 		function getRepoLangs (repo) {
 			currentRepo.showId = repo.id;
-			console.log(config.api.endPoint + config.api.reposUrl + repo.owner.login + '/' + repo.name + config.api.langsParam)
 
 			$http.get(config.api.endPoint + config.api.reposUrl + repo.owner.login + '/' + repo.name + config.api.langsParam)
 				.success(function (result) {
@@ -45,14 +43,14 @@
 			var maxValue = 0;
 
 			// First, determine the maxValue
-			_.forEach(langs, function(value, key) { 
+			angular.forEach(langs, function(value, key) {
 				maxValue = Math.max(value, maxValue);
 			});
 
 			// Next, don't show fractions that are less than 2%
-			_.forEach(langs, function(value, key) { 
+			angular.forEach(langs, function(value, key) {
 				var addData = false;
-				
+
 				if ( value !== maxValue ) {
 					var pc = value / maxValue;
 					if ( pc >= 0.02) {

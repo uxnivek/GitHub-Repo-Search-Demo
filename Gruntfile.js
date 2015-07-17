@@ -313,7 +313,7 @@ module.exports = function(grunt) {
                         'bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js',
                         'bower_components/lodash/dist/lodash.compat.js'
                     ],
-                    
+
                     // '.tmp/scripts/app.js': [
                     '<%= yeoman.dist %>/scripts/app.js': [
                         '<%= yeoman.app %>/app.js',

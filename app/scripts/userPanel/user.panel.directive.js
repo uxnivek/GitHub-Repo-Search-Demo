@@ -4,18 +4,18 @@
 	angular.module('app')
 		.directive('userPanel', userPanelDirective);
 
-	userPanelDirective.$inject = ['config'];
+	userPanelDirective.$inject = ['config', '$http'];
 
-	function userPanelDirective (config) {
+	function userPanelDirective (config, $http) {
 		return {
 			restrict: 'E',
 			replace: true,
 			templateUrl: 'userPanel/user-panel-tpl.html',
 			controller: UserPanelController,
-			controllerAs: 'UserCtrl' // Controller alias which will be used in the template
+			controllerAs: 'UserCtrl'
 		};
 
-		function UserPanelController($http) {
+		function UserPanelController() {
 			var user = this;
 			user.details = {};
 			user.repos = [];

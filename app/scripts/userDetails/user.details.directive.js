@@ -5,14 +5,17 @@
 
 	angular.module('app')
 		
-		.directive('userDetails', function () {
-			return {
-				restrict: 'E',
-				templateUrl: './user-details-tpl.html',
-				replace: true,
-				scope: {
-					user: '='
-				}
-			};
-		});
+		.directive('userDetails', userDetailsDirective);
+
+	function userDetailsDirective () {
+		return {
+			restrict: 'E',
+			templateUrl: 'userDetails/user-details-tpl.html',
+			replace: true,
+			scope: {
+				user: '='
+			}
+		};
+	}
+
 })();

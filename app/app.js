@@ -12,10 +12,13 @@
       }
     });
 
-  // require('./scripts/user.details.controller.js');
-  // require('./scripts/user.details.directive.js');
-  // require('./scripts/userPanel/user.panel.controller.js');
+  // User details
+  require('./scripts/userDetails/user.details.directive.js');
+  // User panel
+  require('./scripts/userPanel/user.panel.controller.js');
   require('./scripts/userPanel/user.panel.directive.js');
-  // require('./scripts/user.repos.directive.js');
+  // User repository
+  require('./scripts/userRepository/user.repository.controller.js');
+  require('./scripts/userRepository/user.repository.directive.js');
   
 })();

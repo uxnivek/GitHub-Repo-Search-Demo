@@ -1,14 +1,13 @@
 (function () {
 	'use strict';
 
-	angular
-		.module('app')
+	angular.module('app')
 		
-		.controller('UserDetailsController', UserDetailsController);
+		.controller('UserRepositoryController', UserRepositoryController);
 
-	UserDetailsController.$inject = ['$http', '$log'];
+	UserRepositoryController.$inject = ['$http', '$log'];
 
-	function UserDetailsController($http, $log) {
+	function UserRepositoryController($http, $log) {
 		var currentRepo = this;
 		currentRepo.showId = '';
 		currentRepo.showChart = false;
@@ -36,7 +35,7 @@
 				});
 		};
 
-		function getRepoLangs (langs) {
+		function createPieChart (langs) {
 			var w = 200;
 			var h = w;
 			var r = h/2;

@@ -5,7 +5,7 @@
 		
 		.controller('UserPanelController', UserPanelController);
 
-	UserPanelController.$inject = ['$http', '$log'];
+	UserPanelController.$inject = ['$http'];
 
 	function UserPanelController($http) {
 		var user = this;
@@ -17,9 +17,9 @@
 		function searchUser (username) {
 
 			// Fetch user
-			$http.get(config.api.endPoint + config.api.usersUrl + username )
-				.success(function (result) {
-					user.details = result;
+			$http.get(config.api.endPoint + config.api.usersUrl + username)
+				.success(function (response) {
+					user.details = response;
 					user.message = '';
 				})
 				.error(function (error) {

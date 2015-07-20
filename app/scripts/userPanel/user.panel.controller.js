@@ -1,39 +1,34 @@
 (function () {
 	'use strict';
 
+	require('./user-panel-service.js');
+
 	angular.module('app')
 		.controller('UserPanelController', UserPanelController);
 
-	UserPanelController.$inject = ['$http', 'config'];
+	UserPanelController.$inject = ['$scope', '$http', '$q', 'userPanelService'];
 
-	function UserPanelController($http, config) {
-		var user = this;
-		user.details = {};
-		user.repos = [];
-		user.message = '';
-		user.searchUser = searchUser;
+	function UserPanelController($scope, $http, $q, userPanelService) {
+		var vm = this;
+		$scope.searchUser = searchUser;
 
 		function searchUser (username) {
-
-			// Fetch user
-			$http.get(config.api.endPoint + config.api.usersUrl + username)
-				.success(function (response) {
-					user.details = response;
-					user.message = '';
+			var user = {};
+			var userRequest = userPanelService.fetchUser(username);
+			var userReposRequest = userPanelService.fetchUserRepos(username);
+			
+			$q.all([
+				userRequest.then(function (data) {
+					user.details = data;
+				}), 
+				userReposRequest.then(function (data) {
+					user.repos = data;
 				})
-				.error(function (error) {
-					user.message = error.message;
-				});
+			])
+			.then(function () {
+				vm = user;
+			});
+		}
+	}
 
-			// Fetch user repos
-			$http.get(config.api.endPoint + config.api.usersUrl + username + config.api.reposParam)
-				.success(function (repos) {
-					user.repos = repos;
-					user.message = '';
-				})
-				.error(function (error) {
-					user.message = error.message;
-				});
-		};
-	};
 })();

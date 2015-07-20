@@ -14,7 +14,7 @@
 			replace: true,
 			templateUrl: 'userPanel/user-panel-tpl.html',
 			controller: 'UserPanelController',
-			controllerAs: 'UserCtrl'
+			controllerAs: 'vm'
 		};
 	};
 

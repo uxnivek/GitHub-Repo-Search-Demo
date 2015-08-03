@@ -7,25 +7,18 @@
 	angular.module('app')
 		.controller('UserRepositoryController', UserRepositoryController);
 
-	UserRepositoryController.$inject = ['userRepositoryService'];
+	UserRepositoryController.$inject = ['$scope', 'userRepositoryService'];
 
-	function UserRepositoryController(userRepositoryService) {
-		var vm = this;
-		vm.showId = '';
-		vm.showChart = false;
+	function UserRepositoryController($scope, userRepositoryService) {
 
-		vm.getRepoLangs = getRepoLangs;
+		$scope.getRepoLangs = getRepoLangs;
 
 		function getRepoLangs (repo) {
-			vm.showId = repo.id;
 
 			userRepositoryService.fetchRepositoryLangs(repo)
 				.then(function (langs) {
-					vm.langs = langs;
-					vm.id = repo.id;
-					vm.showChart = true;
-					vm.reponame = repo.name;
-					pieChartCreator.createPieChart(vm.langs, vm.id);
+					$scope.langs = langs;
+					pieChartCreator.createPieChart($scope.langs, repo.id);
 				});
 		};
 		

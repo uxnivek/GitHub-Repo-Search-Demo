@@ -1,4 +1,4 @@
-function createPieChart (langs) {
+function createPieChart (langs, id) {
 	var w = 200;
 	var h = w;
 	var r = h/2;
@@ -30,7 +30,7 @@ function createPieChart (langs) {
 		}
 	});
 
-	var vis = d3.select('#chart').html('').append('svg:svg').data([data]).attr('width', w).attr('height', h).append('svg:g').attr('transform', 'translate(' + r + ',' + r + ')');
+	var vis = d3.select('#chart'+id).html('').append('svg:svg').data([data]).attr('width', w).attr('height', h).append('svg:g').attr('transform', 'translate(' + r + ',' + r + ')');
 	var pie = d3.layout.pie().value(function(d){return d.value;});
 
 	// declare an arc generator function

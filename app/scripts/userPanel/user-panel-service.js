@@ -1,28 +1,16 @@
 (function () {
 	'use strict';
 
+	require('../httpq-service.js');
+
 	angular.module('app')
 		.service('userPanelService', userPanelService);
 
-	userPanelService.$inject = ['$http', '$q'];
+	userPanelService.$inject = ['httpq', '$q'];
 
-	function userPanelService($http, $q) {
+	function userPanelService(httpq, $q) {
 		return {
-			fetchUserInfo: fetchUserInfo	
-		}
-
-		function fetchData (url) {
-			var deferred = $q.defer();
-
-			$http.get(url)
-				.success(function (response) {
-					deferred.resolve(response);
-				})
-				.error(function (error) {
-					deferred.reject(error);
-				});
-
-			return deferred.promise;
+			fetchUserInfo: fetchUserInfo
 		}
 
 		function userUrl (username) {
@@ -37,8 +25,8 @@
 			var user = {};
 			var deferred = $q.defer();
 
-			var userRequest = fetchData(userUrl(username));
-			var userReposRequest = fetchData(userReposUrl(username));
+			var userRequest = httpq.getData(userUrl(username));
+			var userReposRequest = httpq.getData(userReposUrl(username));
 
 			$q.all([
 				userRequest.then(function (data) {

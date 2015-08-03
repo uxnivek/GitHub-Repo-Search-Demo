@@ -1,28 +1,16 @@
 (function () {
 	'use strict';
 
+	require('../httpq-service.js');
+
 	angular.module('app')
 		.service('userRepositoryService', userRepositoryService);
 
-	userRepositoryService.$inject = ['$http', '$q'];
+	userRepositoryService.$inject = ['httpq', '$q'];
 
-	function userRepositoryService($http, $q) {
+	function userRepositoryService(httpq, $q) {
 		return {
 			fetchRepositoryLangs: fetchRepositoryLangs	
-		}
-
-		function fetchData (url) {
-			var deferred = $q.defer();
-
-			$http.get(url)
-				.success(function (response) {
-					deferred.resolve(response);
-				})
-				.error(function (error) {
-					deferred.reject(error);
-				});
-
-			return deferred.promise;
 		}
 
 		function repositoryLangsUrl (repo) {
@@ -32,7 +20,7 @@
 		function fetchRepositoryLangs (repo) {
 			var deferred = $q.defer();
 
-			fetchData(repositoryLangsUrl(repo))
+			httpq.getData(repositoryLangsUrl(repo))
 				.then(function (data) {
 					deferred.resolve(data);
 				})

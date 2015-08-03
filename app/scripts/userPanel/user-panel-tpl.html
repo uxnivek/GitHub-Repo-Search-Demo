@@ -1,8 +1,8 @@
 <div class="user-panel">
 	<div class="jumbotron">
 		<form name="searchUserForm" class="search-form" 
-			ng-submit="searchUserForm.$valid && searchUser(vm.user)" novalidate>
-			<input ng-model="vm.user" type="username" class="form-control" data-hotkey="s" name="search-name" placeholder="@username" tabindex="1" autocapitalize="off" required />
+			ng-submit="searchUserForm.$valid && vm.searchUser(vm.username)" novalidate>
+			<input ng-model="vm.username" type="username" class="form-control" data-hotkey="s" name="search-name" placeholder="@username" tabindex="1" autocapitalize="off" required />
 			<div class="scope-badge"><img src="images/github.ico" height="16"> <b>GitHub</b></div>
 			<button type="submit" class="btn btn-primary">Search</button>
 			<div class="message">{{vm.message}}</div>
@@ -10,8 +10,8 @@
 	</div>
 
 	<!-- User Details -->
-	<user-details ng-show="vm.details.login" user="vm.details"></user-details>
+	<user-details ng-show="vm.user.details.login" user="vm.user.details"></user-details>
 	<!-- User Repos -->
-	<user-repos ng-show="vm.repos" repos="vm.repos"></user-repos>
+	<user-repos ng-show="vm.user.repos" repos="vm.user.repos"></user-repos>
 
 </div>

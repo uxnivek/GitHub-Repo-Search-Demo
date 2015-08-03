@@ -14,7 +14,7 @@
 			templateUrl: 'userRepository/user-repository-tpl.html',
 			replace: true,
 			controller: 'UserRepositoryController',
-			controllerAs: 'RepoLangsCtrl',
+			controllerAs: 'vm',
 			scope: {
 				repos: '='
 			}

@@ -8,8 +8,7 @@
 
 	function userPanelService($http, $q) {
 		return {
-			fetchUser: fetchUser,
-			fetchUserRepos: fetchUserRepos			
+			fetchUserInfo: fetchUserInfo	
 		}
 
 		function fetchData (url) {
@@ -26,18 +25,35 @@
 			return deferred.promise;
 		}
 
-		function fetchUserRepos (username) {
-			var userReposUrl = 'https://api.github.com/' + 'users/' + username + '/repos';
-
-			// Fetch user repos
-			return fetchData(userReposUrl);
+		function userUrl (username) {
+			return 'https://api.github.com/' + 'users/' + username;
 		}
 
-		function fetchUser (username) {
-			var userUrl = 'https://api.github.com/' + 'users/' + username;
+		function userReposUrl (username) {
+			return 'https://api.github.com/' + 'users/' + username + '/repos';
+		}
 
-			// Fetch user
-			return fetchData(userUrl);
+		function fetchUserInfo (username) {
+			var user = {};
+			var deferred = $q.defer();
+
+			var userRequest = fetchData(userUrl(username));
+			var userReposRequest = fetchData(userReposUrl(username));
+
+			$q.all([
+				userRequest.then(function (data) {
+					user.details = data;
+				}), 
+				userReposRequest.then(function (data) {
+					user.repos = data;
+				})
+			]).then(function (date) {
+				deferred.resolve(user)
+			}).catch(function (error) {
+				deferred.reject(error);
+			});
+
+			return deferred.promise;
 		}
 	}
 	

@@ -1,13 +1,13 @@
 <ul class="repo-list">
-	<li class="source" ng-show="RepoLangsCtrl.showChart">
-		<p>{{RepoLangsCtrl.reponame}}</p>
-		<div id="chart" class="languages-pie-chart"></div>
-	</li>
 	<li class="source" ng-repeat="repo in repos">
+		<div class="source" ng-show="vm.showChart">
+			<p>{{vm.reponame}}</p>
+			<div id="chart" class="languages-pie-chart"></div>
+		</div>
 		<p class="repo">{{repo.name}}</p>
 		<a alt="click to show details" title="click to show details" class="languages-btn btn btn-info"
-			ng-click="RepoLangsCtrl.getRepoLangs(repo)">show details</a>
-		<div class="repo-details" ng-show="repo.id === RepoLangsCtrl.showId">
+			ng-click="vm.getRepoLangs(repo)">show details</a>
+		<div class="repo-details" ng-show="repo.id === vm.showId">
 			<p class="repo-url"><a href="{{repo.html_url}}" target="_blank" class="mini-repo-list-item css-truncate">{{repo.html_url}}</a></p>
 			<p class="repo-description">{{repo.description}}</p>
 		</div>
